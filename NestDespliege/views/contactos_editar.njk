@@ -1,0 +1,26 @@
+{% extends "base.njk" %}
+{% block titulo %}Contactos | Editar{% endblock %}
+{% block contenido %}
+    <h1>Editar contacto: {{ contacto.nombre }}</h1>
+    {% if (contacto) %}
+        <form action="/web/contactos/{{ contacto.id }}" method="post">
+            <div class="form-group mb-3">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" name="nombre" placeholder="Nombre del contacto..." value="{{ contacto.nombre }}"/>
+            </div>
+            <div class="form-group mb-3">
+                <label for="edad">Edad:</label>
+                <input type="number" class="form-control" name="edad" value="{{ contacto.edad }}"/>
+            </div>
+            <div class="form-group mb-3">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" class="form-control" name="telefono" placeholder="Teléfono del contacto..." value="{{ contacto.telefono }}"/>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    {% else %}
+        <div class="alert alert-danger">Contacto no especificado</div>
+    {% endif %}
+{% endblock %}

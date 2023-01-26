@@ -1,0 +1,38 @@
+{% extends "base.njk" %}
+{% block titulo %}Contactos | Listado{% endblock %}
+{% block contenido %}
+    <div class="container">
+        <h1>Lista de contactos</h1>
+        <form class="row g-3" action="/web/contactos/buscar" method="post">
+            <div class="col-auto">
+                <label for="textoBusqueda" class="visually-hidden">textoBusqueda</label>
+                <input type="text" name="textoBusqueda" class="form-control" id="textoBusqueda" placeholder="Contacto a buscar"></div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                </div>
+            </form>
+            {% for contacto in contactos %}
+                <div class="row m-1">
+                    <div class="col-6">{{ contacto.nombre }}</div>
+                    <div class="col-auto">
+                        <a class="btn btn-success" href="/web/contactos/{{ contacto.id }}">Ver ficha</a>
+                    </div>
+                    {% if (session and session.usuario)%}
+                        <div class="col-auto">
+                            <form action="/web/contactos/borrar/{{ contacto.id }}" method="post">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            </form>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn btn-primary" href="/web/contactos/editar/{{ contacto.id }}">Editar</a>
+                        </div>
+                    {% endif %}        
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-12">No hay contactos que mostrar.</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}

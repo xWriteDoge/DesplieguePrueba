@@ -1,0 +1,19 @@
+{% extends "base.njk" %}
+{% block titulo %}Contacto | Ficha{% endblock %}
+{% block contenido %}
+    <h1>Ficha contacto</h1>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ contacto.nombre }}</h5>
+            <p class="card-text">Edad: {{ contacto.edad }}</p>
+            <p class="card-text">Teléfono: {{ contacto.telefono }}</p>
+            {% if userLoged %}
+                <form action="/web/contactos/borrar/{{ contacto.id }}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </form>
+                <a class="btn btn-primary" href="/web/contactos/editar/{{ contacto.id }}">Editar</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
