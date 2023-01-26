@@ -4,7 +4,7 @@ export const ContactoSchema = new mongoose.Schema({
   nombre: {
       type: String,
       required: true,
-      minlength: 3
+      minlength: 3,
   },
   edad: {
       type: Number,
